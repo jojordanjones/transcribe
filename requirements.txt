@@ -1,0 +1,4 @@
+openai>=1.14
+pydub>=0.25
+python-dotenv>=1.0
+flask>=3.0
