@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Processing...</title>
+</head>
+<body>
+    <h1>Transcribing...</h1>
+    <p>Progress: <span id="percent">0</span>%</p>
+    <script>
+    const task = "{{ task_id }}";
+    async function check() {
+        const resp = await fetch(`/progress?task_id=${task}`);
+        const data = await resp.json();
+        document.getElementById('percent').textContent = data.progress;
+        if (data.status === 'done') {
+            window.location = `/result?task_id=${task}`;
+        } else if (data.status === 'error') {
+            document.body.innerHTML = '<p>Error occurred during transcription.</p>';
+        } else {
+            setTimeout(check, 2000);
+        }
+    }
+    check();
+    </script>
+</body>
+</html>
