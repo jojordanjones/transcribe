@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Transcribing...</title>
+    <script>
+        function poll() {
+            fetch(window.location.pathname + '?json=1')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.done) {
+                        if (data.error) {
+                            window.location.href = '/?error=' + encodeURIComponent(data.error);
+                        } else {
+                            window.location.href = '/result/' + '{{ job_id }}';
+                        }
+                    } else {
+                        document.getElementById('percent').textContent = data.progress + '%';
+                        setTimeout(poll, 1000);
+                    }
+                });
+        }
+        window.onload = poll;
+    </script>
+</head>
+<body>
+    <h1>Processing file...</h1>
+    <p id="percent">0%</p>
+</body>
+</html>

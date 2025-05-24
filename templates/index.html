@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Transcribe Audio/Video</title>
+</head>
+<body>
+    <h1>Upload Audio or Video for Transcription</h1>
+    <form action="/transcribe" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".mp3,.wav,.m4a,.mp4,.mov" required>
+        <button type="submit">Upload and Transcribe</button>
+    </form>
+    <p>Large files are automatically split into 5 minute chunks.</p>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
