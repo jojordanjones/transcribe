@@ -1,0 +1,5 @@
+Flask
+python-dotenv
+openai
+moviepy
+pydub
